@@ -1,4 +1,6 @@
 #include "String.h"
+#pragma warning(disable:4996)
+
 
 SString::SString() :init(0), size(0), length(0)
 {
