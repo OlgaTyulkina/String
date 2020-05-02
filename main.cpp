@@ -31,7 +31,7 @@ int main() {
 	cout << x.find_c("z") << endl;
 
 	SString* arr;
-	arr = x.Tstrtok("_");
+	arr = x.Sstrtok("_");
 
 	for (int i = 0; i < sizeof(arr) - 1; i++)
 		cout << arr[i] << " ";
