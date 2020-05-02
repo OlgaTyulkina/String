@@ -1,7 +1,6 @@
 #include "String.h"
 #pragma warning(disable:4996)
 
-
 SString::SString() :init(0), size(0), length(0)
 {
 
@@ -35,10 +34,9 @@ SString::SString(SString& a) {
 	init[length] = 0;
 }
 
-SString::~SString()
-{
+SString::~SString() {
 	if (init != NULL)
-	delete[] init;
+		delete[] init;
 }
 
 void SString::set_s(const char* s) {
@@ -84,7 +82,7 @@ char& SString::operator [](const int index) {
 	if (index < 0 || index >= length)
 		throw "yikes";
 	else
-	        return init[index];
+		return init[index];
 }
 
 ostream& operator <<(ostream& out, SString& a) {
@@ -95,8 +93,7 @@ ostream& operator <<(ostream& out, SString& a) {
 	return out;
 }
 
-istream& operator >> (istream& in, SString& b) 
-{
+istream& operator >> (istream& in, SString& b) {
 	char t[256];
 	in.getline(t, 256);
 	SString e(t);
@@ -104,8 +101,7 @@ istream& operator >> (istream& in, SString& b)
 	return in;
 }
 
-char* SString::find(const char* e) 
-{
+char* SString::find(const char* e) {
 	char* t = strstr(init, e);
 	if (t != NULL)
 		return t;
@@ -113,19 +109,13 @@ char* SString::find(const char* e)
 		return (char*)"Not found";
 }
 
-char* SString::find_c(char* c) 
-{
+char* SString::find_c(const char* c) {
 	char* t = strstr(init, c);
 	if (t != NULL)
 		return t;
 	else
 		return (char*)"Not found";
 }
-
-
-
-
-
 
 SString* SString::Tstrtok(const char* c) {
 	int count = 0;
