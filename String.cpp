@@ -33,7 +33,9 @@ SString::SString(SString& a) {
 	init[length] = 0;
 }
 
-SString::~SString() {
+SString::~SString()
+{
+	if (init != NULL)
 	delete[] init;
 }
 
@@ -54,6 +56,8 @@ SString operator +(SString& a, SString& b) {
 }
 
 SString& SString::operator =(const SString& a) {
+	if (&a == this)
+		return *this;
 	length = a.length;
 	size = length + 1;
 	init = new char[size];
@@ -75,7 +79,10 @@ bool operator >(SString& a, SString& b) {
 }
 
 char& SString::operator [](const int index) {
-	return init[index];
+	if (index < 0 || index >= length)
+		throw "yikes";
+	else
+	        return init[index];
 }
 
 ostream& operator <<(ostream& out, SString& a) {
@@ -98,24 +105,62 @@ istream& operator >> (istream& in, SString& b)
 char* SString::find(const char* e) 
 {
 	char* t = strstr(init, e);
-	return t;
+	if (t != NULL)
+		return t;
+	else
+		return (char*)"Not found";
 }
 
 char* SString::find_c(char* c) 
 {
 	char* t = strstr(init, c);
-	return t;
+	if (t != NULL)
+		return t;
+	else
+		return (char*)"Not found";
 }
 
-void SString::Tstrtok(char* c) {
-	char* istr = strtok(init, c);
 
 
+
+
+
+SString* SString::Tstrtok(const char* c) {
+	int count = 0;
+
+	SString tmp = init;
+
+	char* istr = strtok(tmp.init, c);
 	while (istr != NULL)
 	{
-
-		cout << istr << endl;
-
+		count += 1;
 		istr = strtok(NULL, c);
 	}
+
+	tmp = init;
+
+	SString* result = new SString[count];
+
+	count = 0;
+
+	istr = strtok(tmp.init, c);
+	while (istr != NULL)
+	{
+		result[count] = istr;
+		count += 1;
+		istr = strtok(NULL, c);
+	}
+
+	return result;
+}
+
+void SString::complete(SString& a, SString& b)
+{
+
+	init = new char[a.get_l() + 1 + b.get_l()];
+	length = a.get_l() + b.get_l();
+	size = a.get_l() + 1 + b.get_l();
+	for (int i = 0; i < a.get_l(); i++) init[i] = a.get_s()[i];
+	for (int i = 0; i < b.get_l(); i++) init[i + a.get_l()] = b.get_s()[i];
+	init[a.get_l() + b.get_l()] = 0;
 }
