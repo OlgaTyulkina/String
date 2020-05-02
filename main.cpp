@@ -24,9 +24,16 @@ int main() {
 	cout << (f > e) << " operator >" << endl;
 	cout << f[0] << " operator []" << endl;
 
-	cin >> a;
-	cout << b.find("_c") << endl;
-	cout << b.find_c("z") << endl;
-	b.Tstrtok("_");
+        TString x;
+	cin >> x;
+	
+	cout << x.find("_c") << endl;
+	cout << x.find_c("z") << endl;
+
+	TString* arr;
+	arr = x.Tstrtok("_");
+
+	for (int i = 0; i < sizeof(arr) - 1; i++)
+		cout << arr[i] << " ";
 	return 0;
 }
