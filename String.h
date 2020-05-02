@@ -44,9 +44,9 @@ public:
 
 	char* find(const char* e);
 
-	char* find_c(char* c);
+	char* find_c(const char* c);
 
-	void Tstrtok(char* c);
+	SString* Tstrtok(const char* c);
 
 private:
 	char* init;
