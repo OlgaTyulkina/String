@@ -3,6 +3,7 @@
 #include <array>
 using namespace std;
 
+
 int main() {
 	SString a;
 	SString b("const");
@@ -24,9 +25,9 @@ int main() {
 	cout << (f > e) << " operator >" << endl;
 	cout << f[0] << " operator []" << endl;
 
-        SString x;
+	SString x;
 	cin >> x;
-	
+
 	cout << x.find("_c") << endl;
 	cout << x.find_c("z") << endl;
 
