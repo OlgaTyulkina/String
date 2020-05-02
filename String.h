@@ -14,30 +14,21 @@ public:
 
 	~SString();
 
-	char* get_s() //осуществляем доступ к закрытому полю init
+	char* get_s() 
 	{
 		return init;
 	}
-	int get_l()//осуществляем доступ к закрытому полю length
+	int get_l()
 	{
 		return length;
 	}
-	void set_s(const char* s);//устанавливаем значение для s
+	void set_s(const char* s);
 
 	friend SString operator +(SString& a, SString& b);
 
 	SString& operator =(const SString& a);
 
-	void complete(SString& a, SString& b)
-	{
-
-		init = new char[a.get_l() + 1 + b.get_l()];//создаем массив размера [...]
-		length = a.get_l() + b.get_l();//длина самой строки 
-		size = a.get_l() + 1 + b.get_l(); //длина строки + \0
-		for (int i = 0; i < a.get_l(); i++) init[i] = a.get_s()[i];
-		for (int i = 0; i < b.get_l(); i++) init[i + a.get_l()] = b.get_s()[i];
-		init[a.get_l() + b.get_l()] = 0;
-	}
+	void complete(SString& a, SString& b);
 
 	friend bool operator == (SString& a, SString& b);
 
