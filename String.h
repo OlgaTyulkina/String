@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+
 using namespace std;
 
 class SString {
@@ -8,13 +9,13 @@ public:
 
 	SString(char b, int leng);
 
-	SString(SString& a);
-	
 	SString(const char* tstr);
+
+	SString(SString& a);
 
 	~SString();
 
-	char* get_s() 
+	char* get_s()
 	{
 		return init;
 	}
