@@ -1,12 +1,12 @@
 #include "String.h"
 #pragma warning(disable:4996)
 
-SString::SString() :init(0), size(0), length(0)
+TString::TString() :init(0), size(0), length(0)
 {
 
 }
 
-SString::SString(char b, int leng) {
+TString::TString(char b, int leng) {
 	size = leng + 1;
 	init = new char[size];
 	length = leng;
@@ -14,7 +14,7 @@ SString::SString(char b, int leng) {
 	init[length] = 0;
 }
 
-SString::SString(const char* tstr) {
+TString::TString(const char* tstr) {
 	if (strlen(tstr) > 0) {
 
 		size = strlen(tstr) + 1;
@@ -26,7 +26,7 @@ SString::SString(const char* tstr) {
 
 }
 
-SString::SString(SString& a) {
+TString::TString(TString &a) {
 	size = a.get_l() + 1;
 	length = a.get_l();
 	init = new char[size];
@@ -34,12 +34,12 @@ SString::SString(SString& a) {
 	init[length] = 0;
 }
 
-SString::~SString() {
+TString::~TString() {
 	if (init != NULL)
 		delete[] init;
 }
 
-void SString::set_s(const char* s) {
+void TString::set_s(const char*s) {
 	if (strlen(s) > 0) {
 		size = strlen(s) + 1;
 		length = strlen(s);
@@ -49,13 +49,13 @@ void SString::set_s(const char* s) {
 	}
 }
 
-SString operator +(SString& a, SString& b) {
-	SString c(a);
+TString operator +(TString& a, TString &b) {
+	TString c(a);
 	c.complete(a, b);
 	return c;
 }
 
-SString& SString::operator =(const SString& a) {
+TString &TString::operator =(const TString& a) {
 	if (&a == this)
 		return *this;
 	length = a.length;
@@ -66,26 +66,26 @@ SString& SString::operator =(const SString& a) {
 	return *this;
 }
 
-bool operator == (SString& a, SString& b) {
+bool operator == (TString &a, TString &b) {
 	return(0 == strcmp(a.get_s(), b.get_s()));
 }
 
-bool operator <(SString& a, SString& b) {
+bool operator <(TString &a, TString&b) {
 	return(strcmp(a.get_s(), b.get_s()) < 0);
 }
 
-bool operator >(SString& a, SString& b) {
+bool operator >(TString &a, TString&b) {
 	return(strcmp(a.get_s(), b.get_s()) > 0);
 }
 
-char& SString::operator [](const int index) {
+char& TString::operator [](const int index) {
 	if (index < 0 || index >= length)
 		throw "yikes";
 	else
 		return init[index];
 }
 
-ostream& operator <<(ostream& out, SString& a) {
+ostream& operator <<(ostream& out, TString &a) {
 	for (int i = 0; i < a.get_l(); i++) {
 		out << a.get_s()[i];
 	}
@@ -93,15 +93,15 @@ ostream& operator <<(ostream& out, SString& a) {
 	return out;
 }
 
-istream& operator >> (istream& in, SString& b) {
+istream& operator >> (istream& in, TString& b) {
 	char t[256];
 	in.getline(t, 256);
-	SString e(t);
+	TString e(t);
 	b = e;
 	return in;
 }
 
-char* SString::find(const char* e) {
+char* TString::find(const char *e) {
 	char* t = strstr(init, e);
 	if (t != NULL)
 		return t;
@@ -109,7 +109,7 @@ char* SString::find(const char* e) {
 		return (char*)"Not found";
 }
 
-char* SString::find_c(const char* c) {
+char* TString::find_c(const char *c) {
 	char* t = strstr(init, c);
 	if (t != NULL)
 		return t;
@@ -117,10 +117,10 @@ char* SString::find_c(const char* c) {
 		return (char*)"Not found";
 }
 
-SString* SString::Tstrtok(const char* c) {
+TString* TString::Tstrtok(const char* c) {
 	int count = 0;
 
-	SString tmp = init;
+	TString tmp = init;
 
 	char* istr = strtok(tmp.init, c);
 	while (istr != NULL)
@@ -131,7 +131,7 @@ SString* SString::Tstrtok(const char* c) {
 
 	tmp = init;
 
-	SString* result = new SString[count];
+	TString* result = new TString[count];
 
 	count = 0;
 
@@ -146,7 +146,7 @@ SString* SString::Tstrtok(const char* c) {
 	return result;
 }
 
-void SString::complete(SString& a, SString& b)
+void TString::complete(TString& a, TString& b)
 {
 
 	init = new char[a.get_l() + 1 + b.get_l()];
