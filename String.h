@@ -3,17 +3,17 @@
 
 using namespace std;
 
-class SString {
+class TString {
 public:
-	SString();
+	TString();
 
-	SString(char b, int leng);
+	TString(char b, int leng);
 
-	SString(const char* tstr);
+	TString(const char* tstr);
 
-	SString(SString& a);
+	TString(TString& a);
 
-	~SString();
+	~TString();
 
 	char* get_s()
 	{
@@ -23,31 +23,31 @@ public:
 	{
 		return length;
 	}
-	void set_s(const char* s);
+	void set_s(const char*s);
 
-	friend SString operator +(SString& a, SString& b);
+	friend TString operator +(TString &a, TString &b);
 
-	SString& operator =(const SString& a);
+	TString& operator =(const TString&a);
 
-	void complete(SString& a, SString& b);
+	void complete(TString& a, TString& b);
 
-	friend bool operator == (SString& a, SString& b);
+	friend bool operator == (TString &a, TString &b);
 
-	friend bool operator <(SString& a, SString& b);
+	friend bool operator <(TString &a, TString&b);
 
-	friend bool operator >(SString& a, SString& b);
+	friend bool operator >(TString &a, TString&b);
 
 	char& operator [](const int index);
 
-	friend ostream& operator <<(ostream& out, SString& a);
+	friend ostream& operator <<(ostream& out, TString &a);
 
-	friend istream& operator >> (istream& in, SString& b);
+	friend istream& operator >> (istream& in, TString&b);
 
-	char* find(const char* e);
+	char* find(const char*e);
 
-	char* find_c(const char* c);
+	char* find_c(const char *c);
 
-	SString* Tstrtok(const char* c);
+	TString* Tstrtok(const char *c);
 
 private:
 	char* init;
