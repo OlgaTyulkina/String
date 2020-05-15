@@ -1,80 +1,81 @@
 #include "String.h"
 #pragma warning(disable:4996)
 
-TString::TString() :init(0), size(0), length(0)
+TString::TString() :nov(0), size(0), length(0)
 {
-
 }
 
 TString::TString(char b, int leng) {
 	size = leng + 1;
-	init = new char[size];
+	nov = new char[size];
 	length = leng;
-	for (int i = 0; i < length; i++) init[i] = b;
-	init[length] = 0;
+	for (int i = 0; i < length; i++) nov[i] = b;
+	nov[length] = 0;
 }
 
-TString::TString(const char* tstr) {
+TString::TString(const char* tstr) 
+{
 	if (strlen(tstr) > 0) {
 
 		size = strlen(tstr) + 1;
 		length = strlen(tstr);
-		init = new char[strlen(tstr) + 1];
-		for (size_t i = 0; i < strlen(tstr); i++)init[i] = tstr[i];
-		init[strlen(tstr)] = 0;
+		nov = new char[strlen(tstr) + 1];
+		for (size_t i = 0; i < strlen(tstr); i++)nov[i] = tstr[i];
+		nov[strlen(tstr)] = 0;
 	}
 
 }
 
-TString::TString(TString &a) {
+TString::TString(TString& a) 
+{
 	size = a.get_l() + 1;
 	length = a.get_l();
-	init = new char[size];
-	for (int i = 0; i < length; i++)init[i] = a.get_s()[i];
-	init[length] = 0;
+	nov = new char[size];
+	for (int i = 0; i < length; i++)nov[i] = a.get_s()[i];
+	nov[length] = 0;
 }
 
 TString::~TString() {
-	if (init != NULL)
-		delete[] init;
+	if (nov != NULL)
+		delete[] nov;
 }
 
-void TString::set_s(const char*s) {
+void TString::set_s(const char* s) {
 	if (strlen(s) > 0) {
 		size = strlen(s) + 1;
 		length = strlen(s);
-		init = new char[strlen(s) + 1];
-		for (size_t i = 0; i < strlen(s); i++)init[i] = s[i];
-		init[strlen(s)] = 0;
+		nov = new char[strlen(s) + 1];
+		for (size_t i = 0; i < strlen(s); i++)nov[i] = s[i];
+		nov[strlen(s)] = 0;
 	}
 }
 
-TString operator +(TString& a, TString &b) {
+TString operator +(TString& a, TString& b) {
 	TString c(a);
 	c.complete(a, b);
 	return c;
 }
 
-TString &TString::operator =(const TString& a) {
+TString& TString::operator =(const TString& a) {
 	if (&a == this)
 		return *this;
 	length = a.length;
 	size = length + 1;
-	init = new char[size];
-	for (int i = 0; i < length; i++)init[i] = a.init[i];
-	init[length] = 0;
+	nov = new char[size];
+	for (int i = 0; i < length; i++)nov[i] = a.nov[i];
+	nov[length] = 0;
 	return *this;
 }
 
-bool operator == (TString &a, TString &b) {
+bool operator == (TString& a, TString& b) {
 	return(0 == strcmp(a.get_s(), b.get_s()));
 }
 
-bool operator <(TString &a, TString&b) {
+bool operator <(TString& a, TString& b) {
 	return(strcmp(a.get_s(), b.get_s()) < 0);
 }
 
-bool operator >(TString &a, TString&b) {
+bool operator >(TString& a, TString& b) {
 	return(strcmp(a.get_s(), b.get_s()) > 0);
 }
 
@@ -82,14 +83,15 @@ char& TString::operator [](const int index) {
 	if (index < 0 || index >= length)
 		throw "yikes";
 	else
-		return init[index];
+		return nov[index];
 }
 
-ostream& operator <<(ostream& out, TString &a) {
-	for (int i = 0; i < a.get_l(); i++) {
+ostream& operator <<(ostream& out, TString& a) 
+{
+	for (int i = 0; i < a.get_l(); i++)
+	{
 		out << a.get_s()[i];
 	}
-
 	return out;
 }
 
@@ -101,16 +103,16 @@ istream& operator >> (istream& in, TString& b) {
 	return in;
 }
 
-char* TString::find(const char *e) {
-	char* t = strstr(init, e);
+char* TString::find(const char* e) {
+	char* t = strstr(nov, e);
 	if (t != NULL)
 		return t;
 	else
 		return (char*)"Not found";
 }
 
-char* TString::find_c(const char *c) {
-	char* t = strstr(init, c);
+char* TString::find_c(const char* c) {
+	char* t = strstr(nov, c);
 	if (t != NULL)
 		return t;
 	else
@@ -120,22 +122,22 @@ char* TString::find_c(const char *c) {
 TString* TString::Tstrtok(const char* c) {
 	int count = 0;
 
-	TString tmp = init;
+	TString tmp = nov;
 
-	char* istr = strtok(tmp.init, c);
+	char* istr = strtok(tmp.nov, c);
 	while (istr != NULL)
 	{
 		count += 1;
 		istr = strtok(NULL, c);
 	}
 
-	tmp = init;
+	tmp = nov;
 
 	TString* result = new TString[count];
 
 	count = 0;
 
-	istr = strtok(tmp.init, c);
+	istr = strtok(tmp.nov, c);
 	while (istr != NULL)
 	{
 		result[count] = istr;
@@ -149,10 +151,22 @@ TString* TString::Tstrtok(const char* c) {
 void TString::complete(TString& a, TString& b)
 {
 
-	init = new char[a.get_l() + 1 + b.get_l()];
+	nov = new char[a.get_l() + 1 + b.get_l()];
 	length = a.get_l() + b.get_l();
 	size = a.get_l() + 1 + b.get_l();
-	for (int i = 0; i < a.get_l(); i++) init[i] = a.get_s()[i];
-	for (int i = 0; i < b.get_l(); i++) init[i + a.get_l()] = b.get_s()[i];
-	init[a.get_l() + b.get_l()] = 0;
+	for (int i = 0; i < a.get_l(); i++) nov[i] = a.get_s()[i];
+	for (int i = 0; i < b.get_l(); i++) nov[i + a.get_l()] = b.get_s()[i];
+	nov[a.get_l() + b.get_l()] = 0;
+}
+
+TString TString::repeater(TString& s, int k)
+{
+	if (s.get_l() == 0)
+		throw "Length = 0";
+	TString res(s);
+	for (int i = 0; i < k - 1; i++)
+	{
+		res = res + s;
+	}
+	return res;
 }
